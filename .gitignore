@@ -1,0 +1,26 @@
+# PadesSharp
+bin/
+obj/
+*.user
+.vs/
+.idea/
+.agents/
+.claude/
+*.suo
+*.ncrunch*
+*.lscache
+coverage/
+TestResults/
+*.coveragexml
+nupkg/
+*.nupkg
+*.pfx
+*.p12
+*.pem
+*.key
+*.cer
+*.crt
+*.der
+
+# Local compatibility fixture with unverified redistribution provenance
+/tests/Resources/itext_sample_signed.pdf

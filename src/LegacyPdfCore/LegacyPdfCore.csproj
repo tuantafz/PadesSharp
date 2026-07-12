@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net48;netstandard2.0;net8.0</TargetFrameworks>
+    <AssemblyName>LegacyPdfCore</AssemblyName>
+    <RootNamespace>iTextSharp.text</RootNamespace>
+    <Description>Fork of iTextSharp 4.1.6 LGPL — low-level PDF core for PadesSharp</Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);CS0618;CS0672;CS0809;CS1591;CA5350;CA5351</NoWarn>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>itextsharp.snk</AssemblyOriginatorKeyFile>
+    <IsLegacyProject>true</IsLegacyProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'net8.0'">
+    <PackageReference Include="System.Drawing.Common" />
+  </ItemGroup>
+
+</Project>

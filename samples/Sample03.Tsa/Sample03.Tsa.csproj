@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <Description>PadesSharp Sample 03 — PAdES-T: RFC 3161 timestamp (TSA)</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ModernPdf.Abstractions\ModernPdf.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\ModernPdf.Crypto\ModernPdf.Crypto.csproj" />
+    <ProjectReference Include="..\..\src\ModernPdf.Signing\ModernPdf.Signing.csproj" />
+  </ItemGroup>
+</Project>

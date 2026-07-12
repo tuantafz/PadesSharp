@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!-- Original implementation based on public standards, no code copied from iText 5/7 -->
+    <TargetFrameworks>net48;netstandard2.0;net8.0</TargetFrameworks>
+    <Description>PadesSharp PAdES support: DSS dictionary, VRI dictionary, LTV embedding</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModernPdf.Abstractions\ModernPdf.Abstractions.csproj" />
+    <ProjectReference Include="..\ModernPdf.Crypto\ModernPdf.Crypto.csproj" />
+    <ProjectReference Include="..\ModernPdf.Signing\ModernPdf.Signing.csproj" />
+  </ItemGroup>
+
+</Project>

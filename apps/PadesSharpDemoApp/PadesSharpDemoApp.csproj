@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net9.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyTitle>PadesSharp Demo</AssemblyTitle>
+    <RootNamespace>PadesSharpDemoApp</RootNamespace>
+    <!-- Không kế thừa TargetFrameworks từ Directory.Build.props của thư viện -->
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ModernPdf.Signing\ModernPdf.Signing.csproj" />
+    <ProjectReference Include="..\..\src\ModernPdf.Pades\ModernPdf.Pades.csproj" />
+    <ProjectReference Include="..\..\src\ModernPdf.Crypto\ModernPdf.Crypto.csproj" />
+    <ProjectReference Include="..\..\src\ModernPdf.Appearance\ModernPdf.Appearance.csproj" />
+  </ItemGroup>
+</Project>

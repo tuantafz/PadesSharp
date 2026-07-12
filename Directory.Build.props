@@ -1,0 +1,50 @@
+<Project>
+  <PropertyGroup>
+    <Authors>PadesSharp Contributors</Authors>
+    <Company>PadesSharp</Company>
+    <Product>PadesSharp PDF Signing Library</Product>
+    <Copyright>Copyright © 2026 PadesSharp Contributors</Copyright>
+    <PackageLicenseExpression>LGPL-2.1-or-later</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/tuantafz/PadesSharp</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/tuantafz/PadesSharp</PackageProjectUrl>
+    <PackageTags>pdf;digital-signature;pades;cms;pkcs11;timestamp</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageReleaseNotes>Preview release. Review SECURITY.md and known validation limitations before production use.</PackageReleaseNotes>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <VersionPrefix>0.1.0</VersionPrefix>
+    <VersionSuffix>preview.1</VersionSuffix>
+
+    <!-- Nullable reference types -->
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <LangVersion>latest</LangVersion>
+
+    <!-- Deterministic build -->
+    <Deterministic>true</Deterministic>
+    <ContinuousIntegrationBuild Condition="'$(CI)' == 'true'">true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(IsPackable)' != 'false'">
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+
+  <!-- NOTE: TargetFrameworks is NOT set here because Directory.Build.props
+       runs before IsTestProject/IsSampleProject are evaluated from project files.
+       Each src library sets <TargetFrameworks>net48;netstandard2.0;net8.0</TargetFrameworks>
+       directly in its .csproj. Test and sample projects retain their own <TargetFramework>. -->
+
+  <!-- net8.0 specific -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net8.0'">
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <!-- Suppress nullable warnings on netstandard2.0 and net48 where nullable types differ -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0' OR '$(TargetFramework)' == 'net48'">
+    <Nullable>annotations</Nullable>
+  </PropertyGroup>
+</Project>

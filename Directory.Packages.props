@@ -1,0 +1,29 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- BouncyCastle for CMS, TSA, OCSP, CRL, ASN.1 -->
+    <PackageVersion Include="BouncyCastle.Cryptography" Version="2.4.0" />
+
+    <!-- HTTP client for TSA/OCSP -->
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="8.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+
+    <!-- PKCS#11 adapter -->
+    <PackageVersion Include="Pkcs11Interop" Version="5.2.0" />
+
+    <!-- System.Drawing.Common for .NET Core compatibility -->
+    <PackageVersion Include="System.Drawing.Common" Version="8.0.12" />
+
+    <!-- Test packages -->
+    <PackageVersion Include="xunit" Version="2.9.3" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+    <PackageVersion Include="FluentAssertions" Version="7.2.0" />
+    <PackageVersion Include="Moq" Version="4.20.72" />
+    <PackageVersion Include="WireMock.Net" Version="1.6.9" />
+  </ItemGroup>
+</Project>

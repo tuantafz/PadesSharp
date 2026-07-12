@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <Description>PadesSharp Sample 02 — File-path helpers (SignToFile / ValidateFile)</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ModernPdf.Abstractions\ModernPdf.Abstractions.csproj" />
+    <ProjectReference Include="..\..\src\ModernPdf.Crypto\ModernPdf.Crypto.csproj" />
+    <ProjectReference Include="..\..\src\ModernPdf.Signing\ModernPdf.Signing.csproj" />
+    <ProjectReference Include="..\..\src\ModernPdf.Validation\ModernPdf.Validation.csproj" />
+  </ItemGroup>
+</Project>
