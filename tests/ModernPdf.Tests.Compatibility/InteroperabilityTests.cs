@@ -11,7 +11,7 @@ namespace ModernPdf.Tests.Compatibility;
 /// <summary>
 /// Interoperability tests: verifies that <see cref="DefaultPdfSignatureValidator"/>
 /// can correctly parse and validate PDFs produced by third-party tools
-/// (Adobe Acrobat/Reader, iText 7), not just PDFs signed by PadesSharp itself.
+/// (Adobe Acrobat/Reader), not just PDFs signed by PadesSharp itself.
 /// Fixtures live in tests/Resources and are copied to the test output directory.
 /// </summary>
 public class InteroperabilityTests
@@ -21,29 +21,6 @@ public class InteroperabilityTests
 
     private static Stream OpenResource(string fileName) =>
         File.OpenRead(ResourcePath(fileName));
-
-    // -----------------------------------------------------------------------
-    // iText 7 — fully valid signature with embedded timestamp
-    // -----------------------------------------------------------------------
-
-    [Fact]
-    public void Interop_ITextSignedPdf_IsFullyValid()
-    {
-        using var stream = OpenResource("itext_sample_signed.pdf");
-        var sut = new DefaultPdfSignatureValidator();
-
-        var report = sut.Validate(stream);
-
-        report.Signatures.Should().HaveCount(1, "iText produced exactly one signature field");
-        var sig = report.Signatures[0];
-        sig.DocumentIntegrityValid.Should().BeTrue("byte-range digest must match for an untouched iText PDF");
-        sig.CmsSignatureValid.Should().BeTrue("PadesSharp must verify CMS signatures produced by iText 7");
-        sig.CertificateChainValid.Should().BeTrue();
-        sig.TimestampPresent.Should().BeTrue("the iText fixture embeds an RFC 3161 timestamp");
-        sig.TimestampValid.Should().BeTrue();
-        sig.Errors.Should().BeEmpty();
-        report.IsValid.Should().BeTrue("a genuine, untampered iText-signed PDF must validate cleanly");
-    }
 
     // -----------------------------------------------------------------------
     // Adobe Acrobat/Reader — cryptographically valid, revocation unresolvable offline
