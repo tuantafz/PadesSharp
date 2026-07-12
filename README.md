@@ -28,6 +28,19 @@ layer is a multi-target source fork of iTextSharp 4.1.6 under LGPL-2.1-or-later.
 - Library targets: .NET Framework 4.8, .NET Standard 2.0, and .NET 8
 - A vendor PKCS#11 driver is required only when signing with an HSM or token
 
+## Download the demo app
+
+Windows users can download the latest packaged demo from
+[GitHub Releases](https://github.com/tuantafz/PadesSharp/releases/latest).
+
+Download `PadesSharpDemoApp-<version>-win-x64.zip`, extract the complete archive,
+and run `PadesSharpDemoApp.exe`. The package is self-contained, so a separate .NET
+runtime installation is not required. Windows SmartScreen may display a warning
+because preview executables are not yet code-signed. HSM and USB-token use still
+requires the device vendor's Windows driver.
+
+Use the accompanying `.sha256` file to verify the archive before running it.
+
 ## Installation
 
 NuGet packages have not been published yet. Clone the repository and use project
@@ -134,6 +147,12 @@ dotnet test PadesSharp.sln --configuration Release --no-build
 ```
 
 All tests must finish with zero failures before publishing a release.
+
+To build the same self-contained ZIP used by GitHub Releases:
+
+```powershell
+./scripts/package-demo.ps1 -Version 0.1.0-preview.1
+```
 
 ## Main dependencies
 

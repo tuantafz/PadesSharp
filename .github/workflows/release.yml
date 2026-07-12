@@ -1,0 +1,74 @@
+name: Release demo app
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version without the v prefix (for packaging validation only)"
+        required: true
+        default: "0.1.0-preview.1"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    timeout-minutes: 45
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          global-json-file: global.json
+          cache: true
+          cache-dependency-path: Directory.Packages.props
+
+      - name: Resolve version
+        id: version
+        shell: pwsh
+        run: |
+          if ('${{ github.event_name }}' -eq 'push') {
+            $version = '${{ github.ref_name }}'.TrimStart('v')
+          } else {
+            $version = '${{ inputs.version }}'
+          }
+          "version=$version" >> $env:GITHUB_OUTPUT
+          "prerelease=$($version.Contains('-').ToString().ToLowerInvariant())" >> $env:GITHUB_OUTPUT
+
+      - name: Restore
+        run: dotnet restore PadesSharp.sln
+
+      - name: Build
+        run: dotnet build PadesSharp.sln --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test PadesSharp.sln --configuration Release --no-build --no-restore
+
+      - name: Package self-contained Windows app
+        shell: pwsh
+        run: ./scripts/package-demo.ps1 -Version '${{ steps.version.outputs.version }}' -NoRestore
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: PadesSharpDemoApp-${{ steps.version.outputs.version }}-win-x64
+          path: |
+            artifacts/release/*.zip
+            artifacts/release/*.sha256
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        if: github.event_name == 'push'
+        uses: softprops/action-gh-release@v2
+        with:
+          name: PadesSharp ${{ github.ref_name }}
+          generate_release_notes: true
+          prerelease: ${{ steps.version.outputs.prerelease }}
+          files: |
+            artifacts/release/*.zip
+            artifacts/release/*.sha256

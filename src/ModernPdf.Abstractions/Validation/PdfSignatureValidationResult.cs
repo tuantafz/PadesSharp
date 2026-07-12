@@ -12,6 +12,21 @@ namespace ModernPdf.Abstractions.Validation
         /// <summary>Name of the AcroForm signature field (e.g. "Signature1").</summary>
         public string SignatureName { get; set; } = string.Empty;
 
+        /// <summary>Distinguished name of the signing certificate subject, when embedded in CMS.</summary>
+        public string SignerSubject { get; set; } = string.Empty;
+
+        /// <summary>Distinguished name of the signing certificate issuer, when embedded in CMS.</summary>
+        public string SignerIssuer { get; set; } = string.Empty;
+
+        /// <summary>Length, in bytes, of the PDF revision covered by this signature.</summary>
+        public long SignedRevisionLength { get; set; }
+
+        /// <summary>
+        /// <c>true</c> when the signed revision reaches the current end of the PDF.
+        /// A false value can be normal for an earlier signature in a multi-signature document.
+        /// </summary>
+        public bool CoversWholeDocument { get; set; }
+
         // ── Core cryptographic checks ────────────────────────────────────────
 
         /// <summary>

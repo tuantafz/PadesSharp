@@ -1,5 +1,16 @@
 # Demo Application: Verification Workflow
 
+## Implementation status
+
+The preview demo now includes separate Sign and Verify tabs, batch PDF selection,
+three policy presets, per-file results, per-signature technical details, progress,
+drag-and-drop, and cooperative stop-after-current-file behavior. Signer identity
+and signed revision coverage are exposed by the validation result model.
+
+Remaining follow-up work includes structured error codes, fully asynchronous
+validation with cancellation inside a file, and dedicated non-UI tests for the
+policy-to-banner mapping.
+
 ## Objective
 
 Add a verification workflow to the Windows Forms demo without presenting a single

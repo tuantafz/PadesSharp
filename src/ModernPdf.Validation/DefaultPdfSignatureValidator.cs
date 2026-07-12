@@ -116,6 +116,11 @@ namespace ModernPdf.Validation
                 try
                 {
                     signedContent = AssembleByteRange(pdfBytes, sig.ByteRange);
+                    if (sig.ByteRange.Length == 4)
+                    {
+                        result.SignedRevisionLength = checked(sig.ByteRange[2] + sig.ByteRange[3]);
+                        result.CoversWholeDocument = result.SignedRevisionLength == pdfBytes.LongLength;
+                    }
                 }
                 catch (ArgumentException ex)
                 {
@@ -165,7 +170,12 @@ namespace ModernPdf.Validation
                         allSigned = false;
                         continue;
                     }
-                    if (signingCert == null) signingCert = cert;
+                    if (signingCert == null)
+                    {
+                        signingCert = cert;
+                        result.SignerSubject = cert.SubjectDN?.ToString() ?? string.Empty;
+                        result.SignerIssuer = cert.IssuerDN?.ToString() ?? string.Empty;
+                    }
 
                     bool ok;
                     try { ok = signer.Verify(cert); }

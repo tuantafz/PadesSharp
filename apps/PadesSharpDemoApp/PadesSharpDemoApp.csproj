@@ -16,5 +16,6 @@
     <ProjectReference Include="..\..\src\ModernPdf.Pades\ModernPdf.Pades.csproj" />
     <ProjectReference Include="..\..\src\ModernPdf.Crypto\ModernPdf.Crypto.csproj" />
     <ProjectReference Include="..\..\src\ModernPdf.Appearance\ModernPdf.Appearance.csproj" />
+    <ProjectReference Include="..\..\src\ModernPdf.Validation\ModernPdf.Validation.csproj" />
   </ItemGroup>
 </Project>

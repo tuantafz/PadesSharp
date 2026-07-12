@@ -183,6 +183,28 @@ public class ValidationTests : IDisposable
         report.Signatures[0].Errors.Should().BeEmpty();
     }
 
+    [Fact]
+    public void Validate_ValidSignedPdf_ExposesSignerIdentity()
+    {
+        byte[] pdf = CreateSignedPdf(_validCert, _validProvider);
+
+        var report = _sut.Validate(ToStream(pdf));
+
+        report.Signatures[0].SignerSubject.Should().Contain("CN=ValidSigner");
+        report.Signatures[0].SignerIssuer.Should().NotBeNullOrWhiteSpace();
+    }
+
+    [Fact]
+    public void Validate_ValidSignedPdf_ReportsSignedRevisionCoverage()
+    {
+        byte[] pdf = CreateSignedPdf(_validCert, _validProvider);
+
+        var report = _sut.Validate(ToStream(pdf));
+
+        report.Signatures[0].SignedRevisionLength.Should().Be(pdf.LongLength);
+        report.Signatures[0].CoversWholeDocument.Should().BeTrue();
+    }
+
     [Theory]
     [InlineData(PdfDigestAlgorithm.Sha256)]
     [InlineData(PdfDigestAlgorithm.Sha384)]

@@ -23,6 +23,25 @@ The application targets Windows and .NET 8:
 dotnet run --project apps/PadesSharpDemoApp
 ```
 
+## Download a packaged release
+
+Open [GitHub Releases](https://github.com/tuantafz/PadesSharp/releases/latest) and
+download `PadesSharpDemoApp-<version>-win-x64.zip`. Extract the complete archive
+before running `PadesSharpDemoApp.exe`. The package is self-contained for Windows
+10/11 x64 and does not require a separate .NET runtime installation.
+
+Verify the download with the accompanying checksum file:
+
+```powershell
+$expected = (Get-Content .\PadesSharpDemoApp-<version>-win-x64.zip.sha256).Split(' ')[0]
+$actual = (Get-FileHash .\PadesSharpDemoApp-<version>-win-x64.zip -Algorithm SHA256).Hash.ToLowerInvariant()
+$actual -eq $expected
+```
+
+SmartScreen may warn because preview builds are not code-signed. PKCS#11 devices
+still require their vendor driver. The release page links to the corresponding
+source tag and includes the LGPL license and third-party notices.
+
 The selected certificate must contain or provide access to its private key. For
 USB tokens and HSMs, install the vendor middleware before running the app.
 

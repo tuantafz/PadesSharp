@@ -27,6 +27,7 @@ public partial class MainForm : Form
     public MainForm()
     {
         InitializeComponent();
+        InitializeVerifyUi();
         WireEvents();
     }
 
@@ -210,6 +211,7 @@ public partial class MainForm : Form
         btnClearLog.Text  = L.BtnClearLog;
         btnStopSign.Text  = L.BtnStopSign;
         btnSign.Text      = L.BtnSign;
+        ApplyVerifyLanguage();
 
         // Status label: refresh with Ready only if not in a different state
         if (!btnStopSign.Enabled)
