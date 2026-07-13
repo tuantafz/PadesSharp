@@ -31,7 +31,7 @@ layer is a multi-target source fork of iTextSharp 4.1.6 under LGPL-2.1-or-later.
 ## Download the demo app
 
 Windows users can download the latest packaged demo from
-[GitHub Tags](https://github.com/tuantafz/PadesSharp/tags).
+[GitHub Release](https://github.com/tuantafz/PadesSharp/releases).
 
 Download `PadesSharpDemoApp-<version>-win-x64.zip`, extract the complete archive,
 and run `PadesSharpDemoApp.exe`. The package is self-contained, so a separate .NET
