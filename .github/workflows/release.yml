@@ -46,8 +46,14 @@ jobs:
       - name: Build
         run: dotnet build PadesSharp.sln --configuration Release --no-restore
 
-      - name: Test
-        run: dotnet test PadesSharp.sln --configuration Release --no-build --no-restore
+      - name: Unit tests
+        run: dotnet test tests/ModernPdf.Tests.Unit/ModernPdf.Tests.Unit.csproj --configuration Release --no-build --no-restore
+
+      - name: Integration tests
+        run: dotnet test tests/ModernPdf.Tests.Integration/ModernPdf.Tests.Integration.csproj --configuration Release --no-build --no-restore
+
+      - name: Compatibility tests
+        run: dotnet test tests/ModernPdf.Tests.Compatibility/ModernPdf.Tests.Compatibility.csproj --configuration Release --no-build --no-restore
 
       - name: Package self-contained Windows app
         shell: pwsh

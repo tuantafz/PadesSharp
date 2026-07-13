@@ -10,6 +10,7 @@ jobs:
   build:
     timeout-minutes: 30
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest]
     runs-on: ${{ matrix.os }}
@@ -24,14 +25,20 @@ jobs:
           cache-dependency-path: Directory.Packages.props
 
       - name: Restore
-        run: dotnet restore
+        run: dotnet restore PadesSharp.sln -p:EnableWindowsTargeting=true
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build PadesSharp.sln --configuration Release --no-restore -p:EnableWindowsTargeting=true
 
-      - name: Test
-        run: dotnet test --configuration Release --no-build --logger "console;verbosity=normal" --collect:"XPlat Code Coverage"
+      - name: Unit tests
+        run: dotnet test tests/ModernPdf.Tests.Unit/ModernPdf.Tests.Unit.csproj --configuration Release --no-build --no-restore --logger "console;verbosity=normal" --collect:"XPlat Code Coverage"
+
+      - name: Integration tests
+        run: dotnet test tests/ModernPdf.Tests.Integration/ModernPdf.Tests.Integration.csproj --configuration Release --no-build --no-restore --logger "console;verbosity=normal"
+
+      - name: Compatibility tests
+        run: dotnet test tests/ModernPdf.Tests.Compatibility/ModernPdf.Tests.Compatibility.csproj --configuration Release --no-build --no-restore --logger "console;verbosity=normal"
 
       - name: Pack
         if: matrix.os == 'windows-latest'
-        run: dotnet pack --configuration Release --no-build --output nupkg
+        run: dotnet pack PadesSharp.sln --configuration Release --no-build --output nupkg
