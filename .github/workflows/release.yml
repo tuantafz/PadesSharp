@@ -57,7 +57,7 @@ jobs:
 
       - name: Package self-contained Windows app
         shell: pwsh
-        run: ./scripts/package-demo.ps1 -Version '${{ steps.version.outputs.version }}' -NoRestore
+        run: ./scripts/package-demo.ps1 -Version '${{ steps.version.outputs.version }}'
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
